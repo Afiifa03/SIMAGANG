@@ -198,10 +198,10 @@ if (isset($_GET['hapus'])) {
 				<tr>
 					<th>No</th>
 					<th>Nama</th>
-					<th>NIM</th>
+					<th>NIM/NIS</th>
 					<th>Jurusan</th>
 					<th>Program Studi</th>
-					<th>Asal Kampus</th>
+					<th>Kampus/Sekolah</th>
 					<th>Aksi</th>
 				</tr>
 				<!-- Semua baris isi tabel peserta diisi lengkap, tidak ada baris kosong -->

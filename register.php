@@ -98,17 +98,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="mb-3">
         <label for="nama" class="form-label">Nama</label>
         <input type="text"
-               class="form-control <?= !empty($errors['general']) && empty($_POST['nama']) ? 'is-invalid' : '' ?>"
-               id="nama" name="nama" placeholder="Nama Lengkap"
-               value="<?= htmlspecialchars($_POST['nama'] ?? '') ?>" required>
+              class="form-control <?= !empty($errors['general']) && empty($_POST['nama']) ? 'is-invalid' : '' ?>"
+              id="nama" name="nama" placeholder="Nama Lengkap"
+              value="<?= htmlspecialchars($_POST['nama'] ?? '') ?>" required>
       </div>
 
       <div class="mb-3">
         <label for="email" class="form-label">Email/Username</label>
         <input type="text"
-               class="form-control <?= !empty($errors['general']) && empty($_POST['email']) ? 'is-invalid' : '' ?>"
-               id="email" name="email" placeholder="Username / Email"
-               value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+              class="form-control <?= !empty($errors['general']) && empty($_POST['email']) ? 'is-invalid' : '' ?>"
+              id="email" name="email" placeholder="Username / Email"
+              value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
       </div>
 
       <div class="mb-3 password-field">
@@ -129,8 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="mb-3 password-field">
         <label for="confirm_password" class="form-label">Konfirmasi Kata Sandi</label>
         <input type="password"
-               class="form-control <?= !empty($errors['confirm_password']) ? 'is-invalid' : '' ?>"
-               id="confirm_password" name="confirm_password" placeholder="••••••••••" required>
+              class="form-control <?= !empty($errors['confirm_password']) ? 'is-invalid' : '' ?>"
+              id="confirm_password" name="confirm_password" placeholder="••••••••••" required>
         <button type="button" class="password-toggle-btn" aria-label="Tampilkan/Sembunyikan konfirmasi password" data-target="confirm_password">
           <i class="bi bi-eye" id="icon-confirm"></i>
         </button>
