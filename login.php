@@ -1,37 +1,38 @@
 <?php
 session_start();
+require 'config/koneksi.php'; // koneksi PDO
 
-// Handle form submission
-if ($_POST) {
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    
-    // Demo credentials
-    $valid_credentials = [
-        'admin@bps.go.id' => ['password' => 'admin123', 'type' => 'admin'],
-        'peserta@example.com' => ['password' => 'peserta123', 'type' => 'peserta'],
-    ];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $identifier = trim($_POST['username_email'] ?? ''); // bisa email atau nama
+    $katasandi = $_POST['katasandi'] ?? '';
 
-    if (!empty($email) && !empty($password)) {
-        if (isset($valid_credentials[$email]) && $valid_credentials[$email]['password'] === $password) {
+    if ($identifier === '' || $katasandi === '') {
+        $error = "Mohon isi semua field!";
+    } else {
+        // Ambil user berdasarkan email atau nama
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username_email = ? OR nama = ?");
+        $stmt->execute([$identifier, $identifier]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($katasandi, $user['katasandi'])) {
             $_SESSION['user'] = [
-                'email' => $email,
-                'type' => $valid_credentials[$email]['type'],
+                'id_user' => $user['id_user'],
+                'nama' => $user['nama'], 
+                'username_email' => $user['username_email'],
+                'role' => $user['role'],
                 'logged_in' => true
             ];
 
             // Redirect sesuai role
-            if ($_SESSION['user']['type'] === 'admin') {
+            if ($user['role'] == 'admin') {
                 header('Location: admin_dashboard.php');
             } else {
-                header('Location: peserta_dashboard.php');
+                header('Location: index.php');
             }
             exit;
         } else {
-            $error = "Email atau password salah!";
+            $error = "Email/Nama atau password salah!";
         }
-    } else {
-        $error = "Mohon isi semua field!";
     }
 }
 ?>
@@ -60,11 +61,11 @@ if ($_POST) {
       <form method="POST">
         <div class="mb-3">
           <label for="email" class="form-label">Email / Username</label>
-          <input type="text" class="form-control" id="email" name="email" required value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
+          <input type="text" class="form-control" id="username_email" name="username_email" required value="<?php echo htmlspecialchars($_POST['username_email'] ?? ''); ?>">
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Kata Sandi</label>
-          <input type="password" class="form-control" id="password" name="password" required>
+          <input type="password" class="form-control" id="katasandi" name="katasandi" required>
         </div>
         <button type="submit" class="btn btn-primary w-100">Masuk</button>
       </form>
