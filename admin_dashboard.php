@@ -2,7 +2,7 @@
 session_start();
 
 // Cek apakah user sudah login dan role-nya admin
-if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header("Location: login.php");
     exit;
 }
@@ -179,10 +179,12 @@ $adminName = $_SESSION['user']['email'] ?? 'Admin';
             </button>
             <div id="userDropdownMenu" style="display: none; position: absolute; right: 0; background: #fff; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 6px; z-index: 100;">
                 <a href="profile_admin.php" style="display: block; padding: 10px 20px; color: #2c3e50; text-decoration: none;">Profile</a>
-                <a href="index.php" style="display: block; padding: 10px 20px; color: #e74c3c; text-decoration: none;">Logout</a>
+                <a href="proses/proses_logout.php" style="display: block; padding: 10px 20px; color: #e74c3c; text-decoration: none;">Logout</a>
             </div>
         </div>
     </nav>
+    <!-- NAVBAR END -->
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var btn = document.getElementById('userDropdownBtn');
@@ -204,7 +206,7 @@ $adminName = $_SESSION['user']['email'] ?? 'Admin';
             <div style="font-size: 18px; color: #6c7a89; margin-top: 2px;">Tinjauan sistem dan manajemen</div>
         </div>
         <div class="welcome">
-            Selamat datang, Admin <b><?php echo $_SESSION['user']['email']; ?></b>
+            Selamat datang, Admin <b><?php echo $_SESSION['user']['nama']; ?></b>
         </div>
         <div class="dashboard">
             <div class="card">
