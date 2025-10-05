@@ -19,15 +19,15 @@ $status = isset($_SESSION['status']) ? $_SESSION['status'] : 'Sedang Magang';
 			margin: 0;
 			padding: 0;
 		}
-		   nav {
-			   background-color: #2c3e50;
-			   padding: 48px 48px 36px 48px;
-			   display: flex;
-			   justify-content: space-between;
-			   align-items: center;
-			   color: white;
-			   font-size: 32px;
-		   }
+		nav {
+			background-color: #2c3e50;
+			padding: 32px 32px 24px 32px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: white;
+			font-size: 22px;
+		}
 		.nav-menu {
 			display: flex;
 			gap: 18px;
@@ -193,21 +193,9 @@ $status = isset($_SESSION['status']) ? $_SESSION['status'] : 'Sedang Magang';
 	</style>
 </head>
 <body>
-	<nav>
-		<div style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">SIMAGANG BPS</div>
-		<div class="nav-menu">
-			<a href="admin_dashboard.php"><button class="nav-btn">Dasbor Admin</button></a>
-			<a href="admin_peserta.php"><button class="nav-btn">Peserta</button></a>
-			<a href="admin_progres.php"><button class="nav-btn active">Progres Peserta</button></a>
-		</div>
-		<div style="position: relative; display: inline-block;">
-			<button id="userDropdownBtn" style="background: none; border: none; color: white; font-size: 22px; cursor: pointer;">👤 ▼</button>
-			<div id="userDropdownMenu" style="display: none; position: absolute; right: 0; background: #fff; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 6px; z-index: 100;">
-				<a href="profile_admin.php" style="display: block; padding: 10px 20px; color: #2c3e50; text-decoration: none;">Profile</a>
-				<a href="index.php" style="display: block; padding: 10px 20px; color: #e74c3c; text-decoration: none;">Logout</a>
-			</div>
-		</div>
-	</nav>
+	<!-- Navbar -->
+	<?php include "admin_navbar.php";?>
+	<!-- Navbar End -->
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var btn = document.getElementById('userDropdownBtn');
