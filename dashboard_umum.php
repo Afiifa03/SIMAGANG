@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 // Check apakah user login dengan role admin
 $is_admin = isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin';
@@ -100,9 +100,9 @@ $slots = [
 
 <?php
 // ✅ Jika admin sudah login, tampilkan navbar admin
-if ($is_admin) {
-    include 'admin_navbar.php';
-}
+// if ($is_admin) {
+//     include 'admin_navbar.php';
+// }
 ?>
 
 <div class="container py-4">
@@ -122,7 +122,7 @@ if ($is_admin) {
 
             <?php if (!$is_admin): ?>
                 <!-- Jika belum login admin -->
-                <a href="login.php" class="btn btn-primary">Masuk dan Daftar Sekarang</a>
+                <a href="login" class="btn btn-primary">Masuk dan Daftar Sekarang</a>
             <?php else: ?>
                 <!-- Jika admin -->
                 <span class="badge bg-success mb-2">Login sebagai: <?= htmlspecialchars($adminName); ?></span><br>

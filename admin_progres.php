@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = ['email' => 'admin@bps.go.id', 'type' => 'admin'];
 }
@@ -193,9 +192,6 @@ $status = isset($_SESSION['status']) ? $_SESSION['status'] : 'Sedang Magang';
 	</style>
 </head>
 <body>
-	<!-- Navbar -->
-	<?php include "admin_navbar.php";?>
-	<!-- Navbar End -->
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var btn = document.getElementById('userDropdownBtn');

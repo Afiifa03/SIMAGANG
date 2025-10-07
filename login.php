@@ -1,5 +1,5 @@
 <?php
-session_start(); // wajib
+// session_start(); // wajib
 if (!empty($_SESSION['username_email'])) {
     header('Location: dashboard_umum'); // arahkan ke halaman home
     exit; // hentikan eksekusi script
@@ -40,7 +40,7 @@ if (!empty($_SESSION['username_email'])) {
       </form>
 
       <div class="mt-3 text-center">
-        <small>Belum punya akun? <a href="register.php">Daftar disini</a></small>
+        <small>Belum punya akun? <a href="register">Daftar disini</a></small>
       </div>
 
       <!-- Demo info -->

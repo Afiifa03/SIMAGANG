@@ -1,6 +1,5 @@
 <?php
-// register.php
-session_start();
+// session_start();
 
 require_once 'config/koneksi.php'; // Gunakan koneksi yang sudah ada
 
@@ -84,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   <div class="card shadow-lg p-4" style="max-width: 520px; width: 100%;">
     <!-- Tombol kembali -->
-    <a href="login.php" class="text-decoration-none mb-3 d-block">
+    <a href="login" class="text-decoration-none mb-3 d-block">
       <i class="bi bi-arrow-left"></i> Kembali
     </a>
 

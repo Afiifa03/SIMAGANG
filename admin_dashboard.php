@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Cek apakah user sudah login dan role-nya admin
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
@@ -164,11 +163,6 @@ $adminName = $_SESSION['user']['email'] ?? 'Admin';
     </style>
 </head>
 <body>
-
-    <!-- NAVBAR -->
-    <?php include "admin_navbar.php"?>
-    <!-- NAVBAR END -->
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var btn = document.getElementById('userDropdownBtn');

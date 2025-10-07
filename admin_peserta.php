@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (!isset($_SESSION['peserta'])) {
 	$_SESSION['peserta'] = [
 		["Afiifa Lhokseum", "20222573010002", "Teknik Informatika", "TIK", "Politeknik Negeri Lhokseumawe"],
@@ -149,9 +148,6 @@ if (isset($_GET['hapus'])) {
 	</style>
 </head>
 <body>
-	<!-- navbar -->
-	<?php include "admin_navbar.php";?>
-	<!-- navbar end -->
 	
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
