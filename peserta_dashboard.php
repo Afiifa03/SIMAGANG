@@ -1,7 +1,7 @@
 <?php
-session_start();
+// session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'peserta') {
-    header("Location: login.php");
+    header("Location: login");
     exit;
 }
 $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';

@@ -1,27 +1,44 @@
 <?php
 // session_start(); // wajib
 if (!empty($_SESSION['username_email'])) {
-    header('Location: dashboard_umum'); // arahkan ke halaman home
-    exit; // hentikan eksekusi script
+  header('Location: dashboard_umum'); // arahkan ke halaman home
+  exit;
 }
+
+$error = $_GET['error'] ?? null;
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - SIMAGANG</title>
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  </style>
 </head>
+
 <body class="bg-light">
 
   <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
     <div class="card shadow p-4" style="width: 400px;">
+      <!-- Tombol kembali -->
+    <a href="dashboard_umum" class="text-decoration-none mb-3 d-block">
+      <i class="bi bi-arrow-left"></i> Kembali
+    </a>
       <h3 class="text-center mb-3 text-primary">Login SIMAGANG</h3>
 
-      <?php if (isset($error)): ?>
+      <!-- 🔧 Tampilkan pesan error -->
+      <?php if (!empty($error)): ?>
         <div class="alert alert-danger">
           <?php echo htmlspecialchars($error); ?>
         </div>
@@ -30,12 +47,20 @@ if (!empty($_SESSION['username_email'])) {
       <form action="proses/proses_login.php" method="POST">
         <div class="mb-3">
           <label for="email" class="form-label">Email / Username</label>
-          <input type="text" class="form-control" id="username_email" name="username_email" required value="<?php echo htmlspecialchars($_POST['username_email'] ?? ''); ?>">
+          <input type="text" class="form-control" id="username_email" name="username_email" required
+            value="<?php echo htmlspecialchars($_POST['username_email'] ?? ''); ?>">
         </div>
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
           <label for="password" class="form-label">Kata Sandi</label>
-          <input type="password" class="form-control" id="katasandi" name="katasandi" required>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password" name="katasandi"
+              placeholder="Masukkan kata sandi">
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
         </div>
+
         <button type="submit" class="btn btn-primary w-100">Masuk</button>
       </form>
 
@@ -47,7 +72,7 @@ if (!empty($_SESSION['username_email'])) {
       <div class="mt-3">
         <small class="text-muted">
           <strong>Demo Login:</strong><br>
-          Admin → admin@bps.go.id / admin123 <br>
+          Admin → admin@bps.go.id / Admin123_ <br>
           Peserta → peserta@example.com / peserta123
         </small>
       </div>
@@ -55,5 +80,19 @@ if (!empty($_SESSION['username_email'])) {
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- 🔧 Script Show/Hide Password -->
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function () {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      this.querySelector('i').classList.toggle('bi-eye');
+      this.querySelector('i').classList.toggle('bi-eye-slash');
+    });
+  </script>
 </body>
+
 </html>

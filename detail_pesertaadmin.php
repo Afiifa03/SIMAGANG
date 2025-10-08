@@ -322,7 +322,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
             </div>
         </form>
         <div style="max-width:1200px; margin:24px auto 0 auto; text-align:left;">
-            <a href="admin_peserta.php">
+            <a href="admin_peserta">
                 <button style="background:#2c3e50; color:#fff; border:none; border-radius:8px; padding:12px 36px; font-size:18px; font-weight:bold; cursor:pointer;">Kembali</button>
             </a>
         </div>

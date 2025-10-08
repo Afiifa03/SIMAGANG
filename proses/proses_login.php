@@ -31,7 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             exit;
         } else {
-            $error = "Email/Nama atau password salah!";
+            // Login gagal : kirim error lewat query string
+            // $error = "Email/Nama atau password salah!";
+            header("location: ../login?error=Username atau Katasandi salah");
+            exit;
         }
     }
 }
