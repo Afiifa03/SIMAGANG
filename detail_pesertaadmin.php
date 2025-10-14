@@ -41,185 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Peserta Admin</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #2ca6a6;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background-color: #2c3e50;
-            padding: 32px 32px 24px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            font-size: 22px;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 18px;
-        }
-        .nav-btn {
-            padding: 10px 32px;
-            border-radius: 12px;
-            border: none;
-            font-size: 20px;
-            font-weight: bold;
-            background: transparent;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.3s, color 0.3s;
-        }
-        .nav-btn.active {
-            background: #fff;
-            color: #2c3e50;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .nav-btn:hover {
-            background: #f4f4f4;
-            color: #2c3e50;
-        }
-        .container {
-            padding: 40px 0;
-            min-height: 100vh;
-        }
-        .magang-card {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border: 1px solid #e0e0e0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 60px 32px 60px;
-            position: relative;
-        }
-        .magang-header {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-        .magang-sub {
-            font-size: 18px;
-            margin-bottom: 18px;
-        }
-        .magang-row {
-            display: flex;
-            gap: 60px;
-            margin-bottom: 18px;
-        }
-        .magang-col {
-            font-size: 16px;
-        }
-        .magang-label {
-            font-weight: bold;
-            min-width: 120px;
-        }
-        .magang-docs {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 12px;
-        }
-        .magang-doc {
-            font-size: 16px;
-        }
-        .magang-doc a {
-            color: #2c3e50;
-            text-decoration: underline;
-        }
-        .magang-ket {
-            font-size: 16px;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-        }
-        .magang-edit {
-            margin-top:2px;
-            font-size:16px;
-            color:#222;
-            cursor:pointer;
-            font-weight:bold;
-        }
-        .magang-edit:hover {
-            text-decoration: underline;
-        }
-        .magang-status-row {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            margin-bottom: 8px;
-        }
-        .magang-status-btn {
-            border: none;
-            border-radius: 12px;
-            padding: 14px 36px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: default;
-            position: absolute;
-            top: 24px;
-            right: 32px;
-            min-width: 200px;
-            text-align: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-            letter-spacing: 1px;
-        }
-        .magang-status-select {
-            font-size: 15px;
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-        .magang-status-label {
-            font-size: 15px;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-        /* Status color classes from admin_dashboard.php */
-        .status {
-            display: inline-block;
-            padding: 14px 36px;
-            margin: 3px 0;
-            border-radius: 12px;
-            font-size: 20px;
-            font-weight: bold;
-            min-width: 200px;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-            letter-spacing: 1px;
-        }
-        .menunggu-verifikasi { 
-            background: linear-gradient(135deg, #D0D0D0, #BFBFBF); 
-            color: #000000; 
-        }
-        .verifikasi-berkas { 
-            background: linear-gradient(135deg, #FBE4A1, #FFD873); 
-            color: #F86C00; 
-        }
-        .wawancara { 
-            background: linear-gradient(135deg, #B3CFFF, #81AFFF); 
-            color: #4721CF; 
-        }
-        .diterima { 
-            background: linear-gradient(135deg, #B4F4AC, #8BE77D); 
-            color: #107705; 
-        }
-        .ditolak { 
-            background: linear-gradient(135deg, #FCB3B3, #F78C8C); 
-            color: #F60000; 
-        }
-        .sedang-magang { 
-            background: linear-gradient(135deg, #DCC6ED, #C39EE3); 
-            color: #8C00E4; 
-        }
-        .selesai-magang { 
-            background: linear-gradient(135deg, #B9E7A3, #90D675); 
-            color: #107705; 
-        }
-    </style>
+    <link rel="stylesheet" href="style_detail_pesertaadmin.css">
 </head>
 <body>
     <nav>
@@ -230,7 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
             <a href="admin_progres.php"><button class="nav-btn">Progres Peserta</button></a>
         </div>
         <div style="position: relative; display: inline-block;">
-            <button id="userDropdownBtn" style="background: none; border: none; color: white; font-size: 22px; cursor: pointer;">👤 ▼</button>
+            <button id="userDropdownBtn" style="background: none; border: none; color: white; font-size: 22px; cursor: pointer;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+                ▼
+            </button>
             <div id="userDropdownMenu" style="display: none; position: absolute; right: 0; background: #fff; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 6px; z-index: 100;">
                 <a href="profile_admin.php" style="display: block; padding: 10px 20px; color: #2c3e50; text-decoration: none;">Profile</a>
                 <a href="index.php" style="display: block; padding: 10px 20px; color: #e74c3c; text-decoration: none;">Logout</a>

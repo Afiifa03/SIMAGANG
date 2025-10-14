@@ -26,6 +26,8 @@ if (isset($_GET['hapus'])) {
 	$id = intval($_GET['hapus']);
 	if (isset($_SESSION['peserta'][$id])) {
 		array_splice($_SESSION['peserta'], $id, 1);
+		// Rapikan index agar urutan peserta tetap berurutan
+		$_SESSION['peserta'] = array_values($_SESSION['peserta']);
 	}
 	header('Location: admin_peserta.php'); exit;
 }
@@ -37,116 +39,7 @@ if (isset($_GET['hapus'])) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Daftar Peserta</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			background-color: #f5f5f5;
-			margin: 0;
-			padding: 0;
-		}
-		nav {
-			background-color: #2c3e50;
-			padding: 32px 32px 24px 32px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			color: white;
-			font-size: 22px;
-		}
-		.nav-menu {
-			display: flex;
-			gap: 18px;
-		}
-		.nav-btn {
-			padding: 10px 32px;
-			border-radius: 12px;
-			border: none;
-			font-size: 20px;
-			font-weight: bold;
-			background: transparent;
-			color: #fff;
-			cursor: pointer;
-			transition: background 0.3s, color 0.3s;
-		}
-		.nav-btn.active {
-			background: #fff;
-			color: #2c3e50;
-			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-		}
-		.nav-btn:hover {
-			background: #f4f4f4;
-			color: #2c3e50;
-		}
-		.container {
-			padding: 30px;
-			min-height: 100vh;
-		}
-		.peserta-title {
-			font-size: 32px;
-			font-weight: bold;
-			margin-bottom: 28px;
-			color: #111;
-			margin-left: 32px;
-		}
-		.card {
-			background: #fff;
-			border-radius: 12px;
-			padding: 25px;
-			box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-			border: 1px solid #e0e0e0;
-			margin-bottom: 30px;
-		}
-		.btn-tambah {
-			background: #fff;
-			color: #222;
-			font-weight: bold;
-			font-size: 18px;
-			border: none;
-			border-radius: 8px;
-			padding: 10px 28px;
-			margin-bottom: 18px;
-			box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			gap: 8px;
-		}
-		.btn-tambah:hover {
-			background: #e0e0e0;
-		}
-		table.peserta-table {
-			width: 100%;
-			border-collapse: collapse;
-			background: #fff;
-			font-size: 22px;
-			border-radius: 12px;
-			overflow: hidden;
-		}
-		table.peserta-table th, table.peserta-table td {
-			border: 1.5px solid #e0e0e0;
-			padding: 18px 14px;
-			text-align: left;
-		}
-		table.peserta-table th {
-			background: #f5f5f5;
-			font-weight: bold;
-		}
-		.table-action {
-			display: flex;
-			gap: 12px;
-			justify-content: center;
-		}
-		.icon-btn {
-			background: none;
-			border: none;
-			cursor: pointer;
-			font-size: 22px;
-			padding: 0;
-		}
-		.icon-btn svg {
-			vertical-align: middle;
-		}
-	</style>
+	<link rel="stylesheet" href="style_admin_peserta.css">
 </head>
 <body>
 	<nav>
@@ -158,7 +51,10 @@ if (isset($_GET['hapus'])) {
 		</div>
 		<div style="position: relative; display: inline-block;">
 			<button id="userDropdownBtn" style="background: none; border: none; color: white; font-size: 22px; cursor: pointer;">
-				👤 ▼
+				<svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
+					<path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+				</svg>
+				▼
 			</button>
 			<div id="userDropdownMenu" style="display: none; position: absolute; right: 0; background: #fff; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 6px; z-index: 100;">
 				<a href="profile_admin.php" style="display: block; padding: 10px 20px; color: #2c3e50; text-decoration: none;">Profile</a>

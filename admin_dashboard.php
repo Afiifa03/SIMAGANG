@@ -1,14 +1,23 @@
 <?php
 session_start();
 
-// Cek apakah user sudah login dan role-nya admin
-if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'admin') {
+// Cek apakah admin sudah login
+if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit;
 }
 
-// Ambil nama admin dari session
-$adminName = $_SESSION['user']['email'] ?? 'Admin';
+// Ambil nama admin dari database
+$adminName = 'Admin';
+if (isset($_SESSION['admin_id'])) {
+    require_once 'koneksi.php';
+    $stmt = $conn->prepare('SELECT username FROM admin WHERE id_admin = ?');
+    $stmt->bind_param('i', $_SESSION['admin_id']);
+    $stmt->execute();
+    $stmt->bind_result($adminName);
+    $stmt->fetch();
+    $stmt->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,151 +26,7 @@ $adminName = $_SESSION['user']['email'] ?? 'Admin';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dasbor Admin</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5; /* background halaman lebih soft */
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background-color: #2c3e50;
-            padding: 32px 32px 24px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            font-size: 22px;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 18px;
-        }
-        .nav-btn {
-            padding: 10px 32px;
-            border-radius: 12px;
-            border: none;
-            font-size: 20px;
-            font-weight: bold;
-            background: transparent;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.3s, color 0.3s;
-        }
-        .nav-btn.active {
-            background: #fff;
-            color: #2c3e50;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .nav-btn:hover {
-            background: #f4f4f4;
-            color: #2c3e50;
-        }
-        .container {
-            padding: 30px;
-            min-height: 100vh;
-        }
-        .welcome {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        .dashboard {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 25px;
-            flex: 1;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border: 1px solid #e0e0e0;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-        }
-        .card h2 {
-            font-size: 28px;
-            margin: 10px 0;
-        }
-        .card p {
-            font-size: 14px;
-            color: #555;
-        }
-        .box-container {
-            display: flex;
-            gap: 20px;
-        }
-        .box {
-            background: #fff;
-            border-radius: 12px;
-            padding: 25px;
-            flex: 1;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border: 1px solid #e0e0e0;
-        }
-        .status {
-            display: inline-block;
-            padding: 5px 18px;
-            margin: 3px 0;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: bold;
-            min-width: 150px;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .status:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-        }
-        .status-right {
-            float: right;
-            margin-left: 16px;
-            margin-top: -8px;
-        }
-
-        /* Gradient dan warna status */
-        .menunggu-verifikasi { 
-            background: linear-gradient(135deg, #D0D0D0, #BFBFBF); 
-            color: #000000; 
-        }
-        .verifikasi-berkas { 
-            background: linear-gradient(135deg, #FBE4A1, #FFD873); 
-            color: #F86C00; 
-        }
-        .wawancara { 
-            background: linear-gradient(135deg, #B3CFFF, #81AFFF); 
-            color: #4721CF; 
-        }
-        .diterima { 
-            background: linear-gradient(135deg, #B4F4AC, #8BE77D); 
-            color: #107705; 
-        }
-        .ditolak { 
-            background: linear-gradient(135deg, #FCB3B3, #F78C8C); 
-            color: #F60000; 
-        }
-        .sedang-magang { 
-            background: linear-gradient(135deg, #DCC6ED, #C39EE3); 
-            color: #8C00E4; 
-        }
-        .selesai-magang { 
-            background: linear-gradient(135deg, #B9E7A3, #90D675); 
-            color: #107705; 
-        }
-
-        /* Persentase di kanan */
-        .persen {
-            float: right;
-            color: #555;
-            font-weight: normal;
-        }
-    </style>
+    <link rel="stylesheet" href="style_admin_dashboard.css">
 </head>
 <body>
 
@@ -175,7 +40,10 @@ $adminName = $_SESSION['user']['email'] ?? 'Admin';
         </div>
         <div style="position: relative; display: inline-block;">
             <button id="userDropdownBtn" style="background: none; border: none; color: white; font-size: 22px; cursor: pointer;">
-                👤 ▼
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+                ▼
             </button>
             <div id="userDropdownMenu" style="display: none; position: absolute; right: 0; background: #fff; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 6px; z-index: 100;">
                 <a href="profile_admin.php" style="display: block; padding: 10px 20px; color: #2c3e50; text-decoration: none;">Profile</a>
@@ -256,7 +124,7 @@ $adminName = $_SESSION['user']['email'] ?? 'Admin';
                     <div style="font-weight:bold; font-size:18px; margin-bottom:2px;">Pendaftaran 7</div>
                     <div style="display:flex; align-items:center; justify-content:space-between;">
                         <span>Desinta 15/1/2025</span>
-                        <span class="status selesai-magang status-right">SELESAI MAGANG</span>
+                        <span class="status selesai-magang status-right">SELESA</span>
                     </div>
                 </div>
             </div>

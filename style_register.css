@@ -1,0 +1,100 @@
+.password-field { position: relative; }
+.password-toggle-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+}
+.strength-meter {
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+.weak { color: red; }
+.medium { color: orange; }
+.strong { color: green; }
+
+body {
+  background: #f7fafc !important;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.card.shadow-lg {
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10) !important;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+}
+
+h3.text-center {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #21a1ad;
+}
+
+.btn-dark {
+  background: #21a1ad;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.btn-dark:hover {
+  background: #17818a;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #222;
+}
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #bdbdbd;
+  font-size: 16px;
+  padding: 10px 12px;
+  background: #f9f9f9;
+  transition: border-color 0.2s;
+}
+.form-control:focus {
+  border-color: #21a1ad;
+  box-shadow: 0 0 0 2px #bfe9ea33;
+}
+
+.invalid-feedback {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.alert-danger {
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+a.text-decoration-none {
+  color: #21a1ad;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+a.text-decoration-none:hover {
+  color: #17818a;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .card.shadow-lg {
+    padding: 18px 6px !important;
+  }
+  .form-label, .form-control {
+    font-size: 15px;
+  }
+  .btn-dark {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+}

@@ -1,0 +1,141 @@
+/* ==== Reset dasar ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ==== Tampilan umum halaman ==== */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9c5d1, #ffe3e3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==== Container utama ==== */
+.login-container {
+  background: #fff;
+  width: 380px;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* ==== Judul login ==== */
+.login-container h2 {
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* ==== Input field ==== */
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: border 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #ff6fa5;
+  outline: none;
+  box-shadow: 0 0 6px rgba(255,111,165,0.3);
+}
+
+/* ==== Label ==== */
+.form-label {
+  display: block;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+/* ==== Tombol login ==== */
+.btn-login {
+  width: 100%;
+  background: #ff6fa5;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+  background: #ff4d88;
+  cursor: pointer;
+}
+
+/* ==== Bagian toggle password ==== */
+.password-toggle {
+  position: relative;
+}
+
+.password-toggle input {
+  padding-right: 40px; /* ruang buat ikon mata di kanan */
+}
+
+.password-toggle i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 18px;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.password-toggle i:hover {
+  color: #ff6fa5;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* ==== Link bawah (daftar / lupa password) ==== */
+.login-container .link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-container .link a {
+  color: #ff6fa5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-container .link a:hover {
+  text-decoration: underline;
+}
+
+/* ==== Animasi kecil saat halaman muncul ==== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-container {
+  animation: fadeIn 0.5s ease;
+}

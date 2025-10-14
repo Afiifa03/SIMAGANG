@@ -12,142 +12,7 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Peserta</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background-color: #e5e5e5;
-            padding: 44px 44px 32px 44px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #222;
-            font-size: 32px;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 18px;
-        }
-        .nav-btn {
-            padding: 16px 44px;
-            border-radius: 16px;
-            border: none;
-            font-size: 28px;
-            font-weight: bold;
-            background: transparent;
-            color: #222;
-            cursor: pointer;
-            transition: background 0.3s, color 0.3s;
-        }
-        .nav-btn.active {
-            background: #222;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .nav-btn:hover {
-            background: #f4f4f4;
-            color: #222;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: #fff;
-            min-width: 220px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            border-radius: 12px;
-            z-index: 100;
-            top: 60px;
-            left: 0;
-            font-size: 32px;
-            font-weight: 500;
-            padding: 12px 0;
-        }
-        .dropdown-content a {
-            display: block;
-            padding: 18px 32px;
-            color: #222;
-            text-decoration: none;
-            border-radius: 8px;
-            margin: 0 8px;
-        }
-        .dropdown-content a:hover {
-            background: #f4f4f4;
-        }
-        .profile {
-            font-size: 14px;
-            font-weight: bold;
-            display: flex;
-            align-items: flex-start;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-        .profile-icon {
-            font-size: 80px;
-            margin-right: 0;
-        }
-        .container {
-            padding: 30px;
-            min-height: 100vh;
-            background: #aee3e3;
-        }
-        .profile-section {
-            background: #4ec3c3;
-            border-radius: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            border: 1px solid #e0e0e0;
-            padding: 36px 64px;
-            margin: 40px auto;
-            max-width: 900px;
-        }
-        .profile-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #222;
-            margin-bottom: 28px;
-        }
-        .profile-form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 32px;
-        }
-        .profile-group {
-            flex: 1 1 350px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        label {
-            font-size: 18px;
-            font-weight: bold;
-            color: #222;
-        }
-        input[type="text"], input[type="email"], select {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 18px;
-            background: #f9f9f9;
-        }
-        .edit-btn {
-            background: #222;
-            color: #fff;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            border-radius: 12px;
-            padding: 14px 38px;
-            margin-top: 32px;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .edit-btn:hover {
-            background: #444;
-        }
-    </style>
+    <link rel="stylesheet" href="style_peserta_profile.css">
 </head>
 <body>
     <nav>
@@ -175,7 +40,17 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
             <a href="peserta_profile.php"><button class="nav-btn active">Profile</button></a>
         </div>
         <div>
-            <button class="nav-btn">&#128276; Notifikasi</button>
+            <button class="nav-btn" id="notifBtn">&#128276; Notifikasi</button>
+            <div id="notifPopup" style="display:none; position:fixed; top:100px; right:60px; background:#fff; border-radius:18px; box-shadow:0 4px 16px rgba(0,0,0,0.18); border:1px solid #e0e0e0; padding:36px 48px; z-index:999; min-width:420px; max-width:90vw;">
+                <div style="font-size:28px; font-weight:bold; margin-bottom:18px; color:#222;">Notifikasi Progres Akun</div>
+                <div style="font-size:20px; color:#222; margin-bottom:18px;">Berikut adalah informasi terbaru dari admin mengenai progres akun Anda:</div>
+                <ul style="font-size:18px; color:#222; margin-bottom:12px; padding-left:18px;">
+                    <li><b>21/09/2025:</b> Status magang Anda telah <span style='color:#8C00E4;font-weight:bold;'>Berlangsung</span>. Silakan cek detail progres di halaman Progres.</li>
+                    <li><b>18/09/2025:</b> Berkas pendaftaran Anda telah diverifikasi oleh admin.</li>
+                    <li><b>15/09/2025:</b> Anda diterima setelah wawancara. Selamat bergabung!</li>
+                </ul>
+                <button id="closeNotif" style="background:#222; color:#fff; font-size:18px; font-weight:bold; border:none; border-radius:10px; padding:10px 32px; margin-top:12px; cursor:pointer;">Tutup</button>
+            </div>
             <a href="index.php" style="text-decoration:none;"><button class="nav-btn" style="color:#e74c3c;">Log Out</button></a>
         </div>
     </nav>
@@ -189,6 +64,25 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
             });
             document.addEventListener('click', function() {
                 menu.style.display = 'none';
+            });
+
+            var notifBtn = document.getElementById('notifBtn');
+            var notifPopup = document.getElementById('notifPopup');
+            var closeNotif = document.getElementById('closeNotif');
+            notifBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notifPopup.style.display = 'block';
+                notifBtn.classList.add('active');
+            });
+            closeNotif.addEventListener('click', function() {
+                notifPopup.style.display = 'none';
+                notifBtn.classList.remove('active');
+            });
+            document.addEventListener('click', function(e) {
+                if (!notifPopup.contains(e.target) && e.target !== notifBtn) {
+                    notifPopup.style.display = 'none';
+                    notifBtn.classList.remove('active');
+                }
             });
         });
     </script>

@@ -1,0 +1,177 @@
+body {
+	font-family: Arial, sans-serif;
+	background: #ffffffff;
+	margin: 0;
+	padding: 0;
+}
+nav {
+	background-color: #2c3e50;
+	padding: 32px 32px 24px 32px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	font-size: 22px;
+}
+.nav-menu {
+	display: flex;
+	gap: 18px;
+}
+.nav-btn {
+	padding: 10px 32px;
+	border-radius: 12px;
+	border: none;
+	font-size: 20px;
+	font-weight: bold;
+	background: transparent;
+	color: #fff;
+	cursor: pointer;
+	transition: background 0.3s, color 0.3s;
+}
+.nav-btn.active {
+	background: #fff;
+	color: #2c3e50;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.nav-btn:hover {
+	background: #f4f4f4;
+	color: #2c3e50;
+}
+.container {
+	padding: 30px;
+	min-height: 100vh;
+}
+.title {
+	font-size: 54px;
+	font-weight: bold;
+	color: #111;
+	margin-bottom: 8px;
+}
+.subtitle {
+	font-size: 32px;
+	color: #222;
+	margin-bottom: 32px;
+}
+.progres-card {
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+	border: 1px solid #e0e0e0;
+	max-width: 1400px;
+	margin: 0 auto 40px auto;
+	padding: 48px 80px 36px 80px;
+	position: relative;
+}
+.progres-header {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+.progres-periode {
+	font-size: 16px;
+	margin-bottom: 18px;
+}
+.progres-status {
+	position: absolute;
+	top: 24px;
+	right: 32px;
+	padding: 6px 18px;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: bold;
+	min-width: 120px;
+	text-align: center;
+}
+.menunggu-verifikasi {
+	background: linear-gradient(135deg, #D0D0D0, #BFBFBF);
+	color: #000000;
+}
+.verifikasi-berkas {
+	background: linear-gradient(135deg, #FBE4A1, #FFD873);
+	color: #F86C00;
+}
+.wawancara {
+	background: linear-gradient(135deg, #B3CFFF, #81AFFF);
+	color: #4721CF;
+}
+.diterima {
+	background: linear-gradient(135deg, #B4F4AC, #8BE77D);
+	color: #107705;
+}
+.ditolak {
+	background: linear-gradient(135deg, #FCB3B3, #F78C8C);
+	color: #F60000;
+}
+.sedang-magang {
+	background: linear-gradient(135deg, #DCC6ED, #C39EE3);
+	color: #8C00E4;
+}
+.selesai-magang {
+	background: linear-gradient(135deg, #B9E7A3, #90D675);
+	color: #107705;
+}
+.progres-bar-container {
+	width: 100%;
+	background: #000;
+	border-radius: 8px;
+	height: 12px;
+	margin: 18px 0 8px 0;
+	position: relative;
+}
+.progres-bar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 12px;
+	border-radius: 8px;
+	background: linear-gradient(90deg, #4b3aff 0%, #7b6cff 100%);
+}
+.progres-bar.selesai {
+	background: linear-gradient(90deg, #6e5cff 0%, #a6a1ff 100%);
+}
+.progres-bar-dot {
+	position: absolute;
+	top: -4px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #4b3aff;
+	border: 3px solid #fff;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.progres-bar-dot.selesai {
+	background: #6e5cff;
+}
+.progres-bar-label {
+	position: absolute;
+	right: 0;
+	top: -28px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #222;
+}
+.progres-info-row {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 18px;
+	margin-bottom: 8px;
+}
+.progres-info-label {
+	font-weight: bold;
+}
+.progres-ket {
+	font-size: 16px;
+	margin-bottom: 18px;
+}
+.progres-edit {
+	position: absolute;
+	right: 40px;
+	bottom: 18px;
+	font-size: 16px;
+	color: #222;
+	cursor: pointer;
+	font-weight: bold;
+}
+.progres-edit:hover {
+	text-decoration: underline;
+}
