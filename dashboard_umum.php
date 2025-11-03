@@ -2,13 +2,13 @@
 
 // Check apakah user login dengan role admin
 $is_admin = isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin';
-$is_peserta = isset($_SESSION['user']) && $_SESSION['user']['role'] === 'peserta';
+$is_peserta = isset($_SESSION['user']) && $_SESSION['user']['role'] === 'user';
 
 // Ambil nama admin(jika sudah login)
 $adminName = $is_admin ? ($_SESSION['user']['email'] ?? 'admin') : null;
 
 // Ambil nama admin(jika sudah login)
-$pesertaName = $is_peserta ? ($_SESSION['user']['email'] ?? 'peserta') : null;
+$pesertaName = $is_peserta ? ($_SESSION['user']['email'] ?? 'user') : null;
 
 // Data dummy
 $stats = [
@@ -83,6 +83,8 @@ $slots = [
             background: #f4f4f4;
             color: #2c3e50;
         }
+
+        
     </style>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -107,13 +109,6 @@ $slots = [
             });
         });
     </script>
-
-    <?php
-    // ✅ Jika admin sudah login, tampilkan navbar admin
-// if ($is_admin) {
-//     include 'admin_navbar.php';
-// }
-    ?>
 
     <div class="container py-4">
         <!-- Header -->

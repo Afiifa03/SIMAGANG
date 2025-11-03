@@ -48,7 +48,7 @@ $error = $_GET['error'] ?? null;
         <div class="mb-3">
           <label for="email" class="form-label">Email / Username</label>
           <input type="text" class="form-control" id="username_email" name="username_email" required
-            value="<?php echo htmlspecialchars($_POST['username_email'] ?? ''); ?>">
+            value="<?php echo htmlspecialchars($_POST['username_email'] ?? ''); ?>" placeholder="Masukkan email/username">
         </div>
         <div class="mb-3 position-relative">
           <label for="password" class="form-label">Kata Sandi</label>
@@ -72,8 +72,8 @@ $error = $_GET['error'] ?? null;
       <div class="mt-3">
         <small class="text-muted">
           <strong>Demo Login:</strong><br>
-          Admin → admin@bps.go.id / Admin123_ <br>
-          Peserta → peserta@example.com / peserta123
+          Admin → admin@example.com / Admin123_ <br>
+          Peserta → peserta@example.com / Peserta123_
         </small>
       </div>
     </div>

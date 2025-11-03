@@ -2,7 +2,7 @@
 
 // Cek apakah user sudah login dan role-nya admin
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    header("Location: login.php");
+    header("Location: login");
     exit;
 }
 

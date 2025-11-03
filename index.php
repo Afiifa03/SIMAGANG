@@ -33,10 +33,10 @@ if ($role === 'admin') {
 }
 
 // ===== ROUTING UNTUK PESERTA =====
-elseif ($role === 'peserta') {
+elseif ($role === 'user') {
     $file = "{$page}.php";
     if (file_exists($file)) {
-        include "navbar.php";
+        include "peserta_navbar.php";
         include $file;
     } else {
         echo "<h3 style='padding:20px;'>Halaman tidak ditemukan!</h3>";

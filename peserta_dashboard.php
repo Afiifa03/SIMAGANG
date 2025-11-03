@@ -1,11 +1,12 @@
 <?php
 // session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'peserta') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'user') {
     header("Location: login");
     exit;
 }
-$namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
+$namaPeserta = $_SESSION['user']['email'] ?? 'user';
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -20,26 +21,17 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
             padding: 0;
         }
         nav {
-            background-color: #e5e5e5;
+            background-color: #2c3e50;
             padding: 32px 32px 24px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #222;
+            color: white;
             font-size: 22px;
         }
         .nav-menu {
             display: flex;
             gap: 18px;
-        }
-        nav {
-            background-color: #e5e5e5;
-            padding: 44px 44px 32px 44px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #222;
-            font-size: 32px;
         }
         .nav-btn {
             padding: 10px 32px;
@@ -48,18 +40,18 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
             font-size: 20px;
             font-weight: bold;
             background: transparent;
-            color: #222;
+            color: #fff;
             cursor: pointer;
             transition: background 0.3s, color 0.3s;
         }
         .nav-btn.active {
-            background: #222;
-            color: #fff;
+            background: #fff;
+            color: #2c3e50;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .nav-btn:hover {
             background: #f4f4f4;
-            color: #222;
+            color: #2c3e50;
         }
         .profile {
             font-size: 14px;
@@ -102,7 +94,7 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
             box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
         .card h2 {
-            font-size: 44px;
+            font-size: 30px;
             margin: 18px 0 10px 0;
             font-weight: bold;
         }
@@ -204,35 +196,6 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
     </style>
 </head>
 <body>
-    <nav>
-        <div class="profile">
-            <span class="profile-icon">&#128100;</span>
-            <div style="display:flex; flex-direction:column; justify-content:center; align-items:flex-start; margin-left:18px;">
-                <span style="font-size:22px; font-weight:bold; text-align:left;">
-                    Selamat datang, Peserta
-                </span>
-                <span style="font-size:22px; font-weight:bold; text-align:left; word-break:break-word;">
-                    <?php echo htmlspecialchars($namaPeserta); ?>
-                </span>
-            </div>
-        </div>
-        <div class="nav-menu">
-            <a href="#"><button class="nav-btn active">Dasbor Peserta</button></a>
-            <div class="dropdown">
-                <button class="nav-btn">Kegiatan &#9662;</button>
-                <div class="dropdown-content">
-                    <a href="peserta_ringkasankegiatan.php">Ringkasan</a>
-                    <a href="peserta_pendaftaran.php">Daftar Baru</a>
-                    <a href="peserta_progres.php">Progres</a>
-                </div>
-            </div>
-            <a href="peserta_profile.php"><button class="nav-btn">Profile</button></a>
-        </div>
-        <div>
-            <button class="nav-btn">&#128276; Notifikasi</button>
-            <a href="index.php" style="text-decoration:none;"><button class="nav-btn" style="color:#e74c3c;">Log Out</button></a>
-        </div>
-    </nav>
     <script>
         document.querySelectorAll('.dropdown .nav-btn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
@@ -249,7 +212,7 @@ $namaPeserta = $_SESSION['user']['nama'] ?? 'Peserta';
     </script>
     <div class="container">
         <div style="margin-bottom: 18px;">
-            <div style="font-size: 48px; font-weight: bold; color: #111;">Dasbor Peserta</div>
+            <div style="font-size: 35px; font-weight: bold; color: #111;">Dasbor Peserta</div>
             <div style="font-size: 28px; color: #6c7a89; margin-top: 6px;">Tinjauan sistem dan manajemen</div>
         </div>
         <div class="dashboard">
